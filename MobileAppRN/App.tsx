@@ -17,13 +17,9 @@ import {
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {useColorMode, HStack, Switch} from 'native-base';
+
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -55,6 +51,23 @@ function Section({children, title}: SectionProps): React.JSX.Element {
   );
 }
 
+function ToggleDarkMode() {
+  const {colorMode, toggleColorMode} = useColorMode();
+  return (
+    <HStack space={2}>
+      <Text>Dark</Text>
+      <Switch
+        isChecked={colorMode === 'light' ? true : false}
+        onToggle={toggleColorMode}
+        aria-label={
+          colorMode === 'light' ? 'switch to dark mode' : 'switch to light mode'
+        }
+      />
+      <Text>Light</Text>
+    </HStack>
+  );
+}
+
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -64,32 +77,27 @@ function App(): React.JSX.Element {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+          <ToggleDarkMode />
+
           <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
+            <Text style={styles.sectionTitle}>Start of work</Text>
           </Section>
           <Section title="See Your Changes">
-            <ReloadInstructions />
+            <Text>YOO YOO</Text>
           </Section>
           <Section title="Debug">
-            <DebugInstructions />
+            <Text>Yes</Text>
           </Section>
           <Section title="Learn More">
-            Read the docs to discover what to do next:
+            <Text>Hello world</Text>
           </Section>
-          <LearnMoreLinks />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -104,6 +112,8 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: '600',
+    flex: 1,
+    textAlign: 'center',
   },
   sectionDescription: {
     marginTop: 8,
