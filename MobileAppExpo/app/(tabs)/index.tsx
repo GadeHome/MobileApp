@@ -13,13 +13,8 @@ export default function Index() {
             <ButtonSpinner color="gray-400" />
             <ButtonText className='font-medium text-sm ml-2'>Please wait...</ButtonText>
         </Button>
-        <Text className="text-white p-10 text-center">Main menu</Text>
-        <Button className="p-3">
-            <ButtonSpinner color="gray-400" />
-            <ButtonText className='font-medium text-sm ml-2'>It works</ButtonText>
-        </Button>  
-
-        <Text className="text-white justify-center p-3">Hello world</Text>
+        <Text className="text-white p-10 text-center">Welcome</Text> 
+        <Text className="text-white text-center text-4xl p-3">Home page</Text>
     </View>
   );
 }

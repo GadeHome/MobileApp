@@ -9,12 +9,14 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
+import { useColorScheme } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
 
 
 export default function RootLayout() {
+  const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
@@ -29,14 +31,14 @@ export default function RootLayout() {
     return null;
   }
 
-  return <GluestackUIProvider mode="light"><Tabs /></GluestackUIProvider>;
   return (
-    <GluestackUIProvider mode="dark">
+    <GluestackUIProvider mode="dark"><ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />     
+          <Stack.Screen name="(pages)" options={{ headerShown: false}} />
         </Stack>
         <StatusBar style="auto" />
-      </GluestackUIProvider>
+      </ThemeProvider></GluestackUIProvider>
   );
 }
 
